@@ -2,8 +2,10 @@ package com.handycodeworks.tweety;
 
 import winterwell.jtwitter.Twitter;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,9 +19,11 @@ public class Tweety extends Activity implements OnClickListener,OnKeyListener{
     private static final String TAG = "Tweety";
     private static final String USERNAME = "mcsgtest";
     private static final String PASSWORD = "pD98^LGy6m";
+    private SharedPreferences prefs;
     
     // Instance variables
-    private Twitter twitter = new Twitter(USERNAME,PASSWORD);
+    private Twitter twitter;
+    private String username, password;
     
     // UI Elements
     private Button updateButton;
@@ -38,6 +42,22 @@ public class Tweety extends Activity implements OnClickListener,OnKeyListener{
         textStatus = (TextView) findViewById(R.id.TextStatus);
         textStatus.setOnKeyListener(this);
         numChars = (TextView) findViewById(R.id.NumChars);
+        
+        // Setup preferences
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        username = prefs.getString("username", USERNAME);
+        password = prefs.getString("password", PASSWORD);
+        twitter = new Twitter(username, password);
+
+        // TEMP button to access preferences
+        Button prefsButton = (Button) findViewById(R.id.Prefs);
+        prefsButton.setOnClickListener(new OnClickListener() {
+	    
+	    public void onClick(View v) {
+		Intent i = new Intent(Tweety.this,Prefs.class);
+		startActivity(i);
+	    }
+	});
         
         // Set application name for twitter
         twitter.setSource(TAG);

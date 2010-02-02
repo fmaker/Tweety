@@ -12,7 +12,8 @@
             </intent-filter>
         </activity>
 
-    </application>
+    <activity android:name="Prefs"></activity>
+</application>
     <uses-sdk android:minSdkVersion="4" />
 
 
