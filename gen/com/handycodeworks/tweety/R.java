@@ -42,7 +42,9 @@ public final class R {
         public static final int empty_status=0x7f060006;
         public static final int hello=0x7f060001;
         public static final int max_characters=0x7f060000;
+        public static final int no_twitter=0x7f060007;
         public static final int status_posted=0x7f060005;
+        public static final int status_too_long=0x7f060008;
         public static final int update=0x7f060004;
         public static final int whats_happening=0x7f060003;
     }
