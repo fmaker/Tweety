@@ -1,6 +1,7 @@
 package com.handycodeworks.tweety;
 
 import winterwell.jtwitter.Twitter;
+import winterwell.jtwitter.TwitterException;
 import winterwell.jtwitter.Twitter.Status;
 import android.app.Service;
 import android.content.ContentValues;
@@ -13,11 +14,14 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 public class UpdateService extends Service implements OnSharedPreferenceChangeListener{
     // Constants
-    private static final String USERNAME = "mcsgtest";
-    private static final String PASSWORD = "pD98^LGy6m";
+    //private static final String USERNAME = "mcsgtest";
+    //private static final String PASSWORD = "pD98^LGy6m";
+    private static final String USERNAME = "frankmaker";
+    private static final String PASSWORD = "pepsi?3";
     private static final String TAG = "UpdateService";
     
     // Instance variables
@@ -81,12 +85,12 @@ public class UpdateService extends Service implements OnSharedPreferenceChangeLi
 
     class Updater implements Runnable {
 	private static final String TAG = "Updater";
-	private static final long DELAY = 10000L; // 10s
+	private static final long DELAY = 60000L; // 60s
 
         public void run() {
             Log.d(TAG, "Updater ran");
             
-	    // TODO connect to twitter, get timelines, update database
+            try{
 	    for (Status s : getTwitter().getFriendsTimeline()) {
 		Log.d(TAG, "Got status: " + s);
 		ContentValues v = DatabaseOpenHelper.statusToContentValues(s);
@@ -97,6 +101,10 @@ public class UpdateService extends Service implements OnSharedPreferenceChangeLi
 		    
 		}
 	    }
+            }
+            catch(TwitterException.RateLimit ter){
+        	Toast.makeText(UpdateService.this, "Rate limited (Too much Twitter!", Toast.LENGTH_SHORT).show();
+            }
 
 	    mHandler.postDelayed(this, DELAY);
         }

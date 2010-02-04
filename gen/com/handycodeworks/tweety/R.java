@@ -13,6 +13,7 @@ public final class R {
     public static final class color {
         public static final int background=0x7f050001;
         public static final int button_background=0x7f050003;
+        public static final int content_background=0x7f050005;
         public static final int entered_text=0x7f050002;
         public static final int title_text=0x7f050004;
         public static final int update_font_color=0x7f050000;
@@ -25,28 +26,37 @@ public final class R {
         public static final int twitter_icon=0x7f020004;
     }
     public static final class id {
+        public static final int LinearLayout01=0x7f080004;
         public static final int NumChars=0x7f080002;
         public static final int RelativeLayout01=0x7f080001;
         public static final int TextStatus=0x7f080000;
         public static final int UpdateButton=0x7f080003;
-        public static final int menuPrefs=0x7f080004;
+        public static final int listTimeLine=0x7f080008;
+        public static final int menuPrefs=0x7f080009;
+        public static final int menuTimeline=0x7f08000a;
+        public static final int rowName=0x7f080005;
+        public static final int rowStatus=0x7f080007;
+        public static final int rowTime=0x7f080006;
     }
     public static final class layout {
         public static final int main=0x7f030000;
+        public static final int row=0x7f030001;
+        public static final int timeline=0x7f030002;
     }
     public static final class menu {
         public static final int menu=0x7f070000;
     }
     public static final class string {
-        public static final int app_name=0x7f060002;
-        public static final int empty_status=0x7f060006;
-        public static final int hello=0x7f060001;
-        public static final int max_characters=0x7f060000;
-        public static final int no_twitter=0x7f060007;
-        public static final int status_posted=0x7f060005;
-        public static final int status_too_long=0x7f060008;
-        public static final int update=0x7f060004;
-        public static final int whats_happening=0x7f060003;
+        public static final int app_name=0x7f060003;
+        public static final int empty_status=0x7f060007;
+        public static final int hello=0x7f060002;
+        public static final int max_characters=0x7f060001;
+        public static final int no_twitter=0x7f060008;
+        public static final int status_posted=0x7f060006;
+        public static final int status_too_long=0x7f060009;
+        public static final int timeline_title=0x7f060000;
+        public static final int update=0x7f060005;
+        public static final int whats_happening=0x7f060004;
     }
     public static final class xml {
         public static final int prefs=0x7f040000;

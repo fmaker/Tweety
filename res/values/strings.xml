@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="timeline_title">Timeline</string>
 	<string name="max_characters">140</string>
 	<string name="hello">Hello World, Tweety!</string>
 	<string name="app_name">Tweety</string>

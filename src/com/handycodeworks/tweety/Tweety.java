@@ -126,10 +126,14 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
     public boolean onOptionsItemSelected(MenuItem item) {
 
 	switch (item.getItemId()) {
-	case R.id.menuPrefs:
-	    Intent i = new Intent(Tweety.this, Prefs.class);
-	    startActivity(i);
-	    break;
+        	case R.id.menuPrefs:
+        	    Intent ip = new Intent(Tweety.this, Prefs.class);
+        	    startActivity(ip);
+        	    break;
+        	case R.id.menuTimeline:
+        	    Intent it = new Intent(Tweety.this, Timeline.class);
+        	    startActivity(it);
+        	    break;
 	}
 	return true;
     }
