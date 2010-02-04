@@ -6,14 +6,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.provider.BaseColumns;
 import android.util.Log;
 
 public class DatabaseOpenHelper extends SQLiteOpenHelper{
     static final String TAG = "DatabaseOpenHelper";
     static final String DATABASE_NAME = "timeline.sqlite";
-    static final int DATABASE_VERSION = 6;
+    static final int DATABASE_VERSION = 7;
     static final String TABLE = "timeline";
     static final String C_ID = BaseColumns._ID;
     static final String C_CREATED_AT ="created_at";

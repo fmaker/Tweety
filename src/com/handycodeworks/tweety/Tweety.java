@@ -58,16 +58,9 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 			mTwitter = null;
 		    }
 		});
-    }
-
-    @Override
-    protected void onResume() {
-	super.onResume();
 	
 	// Start update service
 	startService(new Intent(this,UpdateService.class));
-	
-	
     }
 
     private Twitter getTwitter(){
@@ -82,7 +75,6 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
     
     @Override
     protected void onStop() {
-	stopService(new Intent(this,UpdateService.class));
 	super.onStop();	
     }
 
@@ -136,6 +128,12 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
         	    break;
 	}
 	return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+	stopService(new Intent(this,UpdateService.class));
+	super.onDestroy();
     }
 
     private final int NUM_CHARS = 140;

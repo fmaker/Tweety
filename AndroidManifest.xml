@@ -14,7 +14,8 @@
 
     <activity android:name="Prefs"></activity>
 <service android:name="UpdateService"></service>
-<activity android:name="Timeline"></activity>
+<activity android:name="Timeline">
+</activity>
 </application>
     <uses-sdk android:minSdkVersion="4" />
 
