@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="tweets_vibrate">New Tweets Vibrate</string>
+    <string name="clear">Clear</string>
+    <string name="location">Location</string>
     <string name="timeline_title">Timeline</string>
 	<string name="max_characters">140</string>
 	<string name="hello">Hello World, Tweety!</string>

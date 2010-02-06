@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Debug;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -27,18 +29,20 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
     private static final String USERNAME = "mcsgtest";
     private static final String PASSWORD = "pD98^LGy6m";
     private SharedPreferences prefs;
+    static LocationHelper sLocationHelper;
 
     // Instance variables
     private Twitter mTwitter;
     private String username, password;
 
     // UI Elements
-    private Button updateButton;
+    private Button updateButton, locationButton, clearButton;
     private TextView textStatus, numChars;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	
 	setContentView(R.layout.main);
 
 	// Find views by id
@@ -47,6 +51,10 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 	textStatus = (TextView) findViewById(R.id.TextStatus);
 	textStatus.setOnKeyListener(this);
 	numChars = (TextView) findViewById(R.id.NumChars);
+	locationButton = (Button) findViewById(R.id.locationButton);
+	locationButton.setOnClickListener(this);
+	clearButton = (Button) findViewById(R.id.clearButton);
+	clearButton.setOnClickListener(this);
 
 	// Setup preferences
 	prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -61,49 +69,68 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 	
 	// Start update service
 	startService(new Intent(this,UpdateService.class));
+	
+	// Init location manager
+	sLocationHelper = new LocationHelper(this);
+	sLocationHelper.startUpdates();
     }
 
     private Twitter getTwitter(){
 	if(mTwitter == null){
 	    username = prefs.getString("username", USERNAME);
 	    password = prefs.getString("password", PASSWORD);
+	    
+	    
+	    if(username == "" || username == null ||
+	       password == "" || password == null ){
+		Toast.makeText(getApplicationContext(), "Username and/or password not set!", 
+			Toast.LENGTH_SHORT).show();
+	    }
 	    mTwitter = new Twitter(username, password);
-	    mTwitter.setSource(TAG);
+	    mTwitter.setSource(TAG); // Set Tweety as our twitter app name
 	}
 	return mTwitter;
     }
-    
-    @Override
-    protected void onStop() {
-	super.onStop();	
-    }
 
     public void onClick(View v) {
+
 	String enteredText = textStatus.getText().toString();
 
-	// Status can't be empty
-	if (enteredText.length() == 0) {
-	    Toast.makeText(this, R.string.empty_status, Toast.LENGTH_SHORT).show();
-	}
-	else if(enteredText.length() < 0){
-	    Toast.makeText(this, R.string.status_too_long, Toast.LENGTH_SHORT).show();
-	}
-	// Only process the button if status is not the same as the hint
-	else if (updateButton.getId() == v.getId()) {
-	    try {
-		getTwitter().setStatus(textStatus.getText().toString());
-		Toast.makeText(this, R.string.status_posted,Toast.LENGTH_SHORT).show();
+	switch (v.getId()) {
+	case R.id.clearButton:
+	    textStatus.setText("");
+	    break;
+	case R.id.locationButton:
+	    String newEntry = enteredText + sLocationHelper.getLocationString();
+	    textStatus.setText(newEntry);
+	    break;
+	case R.id.UpdateButton:
 
-		// Show hint
-		textStatus.setText(null);
+		// Status can't be empty
+		if (enteredText.length() == 0) {
+		    Toast.makeText(this, R.string.empty_status, Toast.LENGTH_SHORT).show();
+		}
+		else if(enteredText.length() < 0){
+		    Toast.makeText(this, R.string.status_too_long, Toast.LENGTH_SHORT).show();
+		}
+		// Only process the button if status is not the same as the hint
+		else if (updateButton.getId() == v.getId()) {
+		    try {
+			getTwitter().setStatus(textStatus.getText().toString());
+			Toast.makeText(this, R.string.status_posted,Toast.LENGTH_SHORT).show();
 
-		// Refresh character label
-		updateCharacterCount();
-	    }
-	    catch(TwitterException te){
-		Log.e(TAG,te.toString());
-		Toast.makeText(this, R.string.no_twitter, Toast.LENGTH_SHORT).show();
-	    }
+			// Show hint
+			textStatus.setText("");
+
+			// Refresh character label
+			updateCharacterCount();
+		    }
+		    catch(TwitterException te){
+			Log.e(TAG,te.toString());
+			Toast.makeText(this, R.string.no_twitter, Toast.LENGTH_SHORT).show();
+		    }
+		}
+		break;
 	}
     }
 
@@ -132,8 +159,14 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 
     @Override
     protected void onDestroy() {
-	stopService(new Intent(this,UpdateService.class));
+	//stopService(new Intent(this,UpdateService.class));
 	super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+	sLocationHelper.stopUpdates();
+	super.onStop();
     }
 
     private final int NUM_CHARS = 140;
