@@ -4,4 +4,5 @@
 		android:title="User Name" android:key="username"></EditTextPreference>
 	<EditTextPreference android:summary="Please enter your password"
 		android:title="Password" android:key="password" android:password="true"></EditTextPreference>
+<CheckBoxPreference android:enabled="true" android:key="tweets_vibrate" android:title="@string/tweets_vibrate"></CheckBoxPreference>
 </PreferenceScreen>

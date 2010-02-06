@@ -16,6 +16,11 @@
 <service android:name="UpdateService"></service>
 <activity android:name="Timeline">
 </activity>
+<receiver android:name="BootReceiver"><intent-filter>
+<action android:name="android.intent.action.BOOT_COMPLETED"></action>
+
+</intent-filter>
+</receiver>
 </application>
     <uses-sdk android:minSdkVersion="4" />
 
@@ -24,4 +29,12 @@
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 
+
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+<uses-permission android:name="android.permission.VIBRATE"></uses-permission>
+
+<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"></uses-permission>
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 </manifest> 

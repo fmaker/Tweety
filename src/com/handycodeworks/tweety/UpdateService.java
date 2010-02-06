@@ -3,8 +3,10 @@ package com.handycodeworks.tweety;
 import winterwell.jtwitter.Twitter;
 import winterwell.jtwitter.TwitterException;
 import winterwell.jtwitter.Twitter.Status;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +15,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -22,9 +25,10 @@ public class UpdateService extends Service implements
     // Constants
     // private static final String USERNAME = "mcsgtest";
     // private static final String PASSWORD = "pD98^LGy6m";
-    private static final String USERNAME = "frankmaker",
+    static final String USERNAME = "frankmaker",
     				PASSWORD = "pepsi?3",
     				TAG = "UpdateService";
+    static final int NOTIFICATION_ID = 1334;
     static final String ACTION_NEW_TWEETS = "ACTION_NEW_TWEETS";
 
     // Instance variables
@@ -34,6 +38,7 @@ public class UpdateService extends Service implements
     DatabaseOpenHelper mDBhelper;
     SQLiteDatabase mDb;
     SharedPreferences prefs;
+    NotificationManager mNotificationManager;
 
     @Override
     public IBinder onBind(Intent arg0) {
@@ -57,6 +62,9 @@ public class UpdateService extends Service implements
 	// Initialize database
 	mDBhelper = new DatabaseOpenHelper(this);
 	mDb = mDBhelper.getWritableDatabase();
+	
+	// Notification manager
+	mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }
 
     private Twitter getTwitter() {
@@ -107,13 +115,32 @@ public class UpdateService extends Service implements
 		Toast.makeText(UpdateService.this,
 			"Rate limited (Too much Twitter!", Toast.LENGTH_SHORT)
 			.show();
+	    } catch (TwitterException.Timeout tet){
+		Log.e(TAG,"Unable to connect to Twitter: Connection timed out");
+	    } catch (TwitterException te){
+		Log.e(TAG,"Unknown Twitter Exception");
 	    }
 
-	    // Broadcast if new tweets are available
+	    // Broadcast and send notification if new tweets are available
 	    if(hasNewTweets){
 		sendBroadcast(new Intent(ACTION_NEW_TWEETS));
 		Log.d(TAG, "sending "+ACTION_NEW_TWEETS+" broadcast...");
 		hasNewTweets = false;
+		
+		// Create notification
+		Notification newTweetsNotification = new Notification(R.drawable.status_icon,
+			"New tweets!",
+			System.currentTimeMillis());
+		Intent showTimeline = new Intent(UpdateService.this, Timeline.class);
+		PendingIntent pi = PendingIntent.getActivity(UpdateService.this, 0, showTimeline, 0);
+		newTweetsNotification.setLatestEventInfo(UpdateService.this,"New Tweets!",
+			"There are new tweets!", pi);
+		
+		if(prefs.getBoolean("tweets_vibrate", true)){
+		    newTweetsNotification.defaults |= Notification.DEFAULT_VIBRATE;
+		}
+		newTweetsNotification.defaults |= Notification.DEFAULT_LIGHTS;
+		mNotificationManager.notify(NOTIFICATION_ID, newTweetsNotification);
 	    }
 	    
 	    // Run again in DELAY seconds

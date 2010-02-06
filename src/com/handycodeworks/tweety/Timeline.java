@@ -1,6 +1,7 @@
 package com.handycodeworks.tweety;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,12 +39,21 @@ public class Timeline extends Activity{
 	// Get data
 	c = mDb.query(DatabaseOpenHelper.TABLE, null, null, null, null, null, 
 		DatabaseOpenHelper.C_CREATED_AT + " DESC");
+	startManagingCursor(c);
 	mAdapter = new TimelineAdapter(this, c);
 	mListTimeLine.setAdapter(mAdapter);
 	
 		
     }
-    
+
+    @Override
+    protected void onResume() {
+	super.onResume();
+	
+	NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+	nm.cancel(UpdateService.NOTIFICATION_ID);
+    }
+
     @Override
     protected void onStart() {
 	super.onStart();
