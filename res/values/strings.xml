@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about">About</string>
+    <string name="boot_enabled">boot_enabled</string>
     <string name="tweets_vibrate">New Tweets Vibrate</string>
     <string name="clear">Clear</string>
     <string name="location">Location</string>

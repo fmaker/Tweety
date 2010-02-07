@@ -3,4 +3,5 @@
 	<item android:id="@+id/menuPrefs" android:title="Preferences"
 		android:titleCondensed="Prefs" android:icon="@android:drawable/ic_menu_preferences"></item>
 <item android:id="@+id/menuTimeline" android:title="Timeline" android:icon="@android:drawable/ic_menu_recent_history"></item>
+<item android:title="@string/about" android:id="@+id/about" android:icon="@android:drawable/ic_menu_info_details"></item>
 </menu>

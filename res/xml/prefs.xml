@@ -5,4 +5,5 @@
 	<EditTextPreference android:summary="Please enter your password"
 		android:title="Password" android:key="password" android:password="true"></EditTextPreference>
 <CheckBoxPreference android:enabled="true" android:key="tweets_vibrate" android:title="@string/tweets_vibrate"></CheckBoxPreference>
+<CheckBoxPreference android:key="@string/boot_enabled" android:title="Twitter Service on Boot" android:summary="Enables the Twitter update service to start on boot." android:defaultValue="False"></CheckBoxPreference>
 </PreferenceScreen>
