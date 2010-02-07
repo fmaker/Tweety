@@ -27,7 +27,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" android:text="Title" android:textColor="#000" android:id="@+id/text1"/>
 
-    <LinearLayout android:id="@+id/LinearLayout01" android:layout_height="wrap_content" android:layout_width="fill_parent"><TextView android:layout_height="wrap_content" android:text="Description" android:autoLink="web|email" android:textColor="#000" android:layout_width="wrap_content" android:id="@+id/text2" android:textSize="12sp"/><TextView android:layout_height="wrap_content" android:text="Link" android:layout_width="fill_parent" android:gravity="right" android:id="@+id/text3" android:autoLink="all" android:textSize="12sp"></TextView></LinearLayout>
+    <TextView android:layout_height="wrap_content" android:text="Description" android:autoLink="web|email" android:textColor="#000" android:layout_width="wrap_content" android:id="@+id/text2" android:textSize="12sp" /><TextView android:layout_height="wrap_content" android:text="Link" android:layout_width="fill_parent" android:id="@+id/text3" android:autoLink="all" android:textSize="12sp" android:textColor="#000" android:typeface="serif"></TextView>
 
 
 

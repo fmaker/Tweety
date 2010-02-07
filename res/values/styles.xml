@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="title">
+<item name="android:background">@drawable/blue_background_title</item>
+<item name="android:gravity">center</item>
+<item name="android:layout_width">fill_parent</item>
+<item name="android:paddingTop">5dp</item>
+<item name="android:paddingBottom">10dp</item>
+<item name="android:layout_marginBottom">10dp</item>
+<item name="android:textColor">@color/title_text</item>
+<item name="android:typeface">serif</item>
+<item name="android:textSize">28sp</item>
+<item name="android:textStyle">bold</item>
+<item name="android:shadowColor">#000</item>
+<item name="android:shadowDx">1.0</item>
+<item name="android:shadowDy">1.0</item>
+<item name="android:shadowRadius">1.0</item>
+</style>
+</resources>
+

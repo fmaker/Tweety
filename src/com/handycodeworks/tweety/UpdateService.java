@@ -128,7 +128,7 @@ public class UpdateService extends Service implements
 		hasNewTweets = false;
 		
 		// Create notification
-		Notification newTweetsNotification = new Notification(R.drawable.status_icon,
+		Notification newTweetsNotification = new Notification(R.drawable.twitter_bird_status,
 			"New tweets!",
 			System.currentTimeMillis());
 		Intent showTimeline = new Intent(UpdateService.this, Timeline.class);

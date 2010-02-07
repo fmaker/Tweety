@@ -16,6 +16,7 @@ public class About extends ListActivity {
     public void onCreate(Bundle icicle) {
 	super.onCreate(icicle);
 	setContentView(R.layout.about);
+	setTitle("About Tweety");
 	addItems();
 	SimpleAdapter notes = new SimpleAdapter(this, list,
 		R.layout.list_item, 
@@ -33,21 +34,34 @@ public class About extends ListActivity {
 
 	item = new HashMap<String, String>();
 	item.put("title", "Author");
-	item.put("description", "Frank Maker");
+	item.put("description", "Frank Maker, Handy Codeworks LLC");
 	item.put("link","fmaker@handycodeworks.com");
 	list.add(item);
 
 	item = new HashMap<String, String>();
-	item.put("title", "Company");
-	item.put("description", "Handy Codeworks LLC");
-	item.put("link","www.handycodeworks.com");
+	item.put("title", "Icon");
+	item.put("description", "Matt Hamm, Supereight Studio");
+	item.put("link","matt@supereightstudio.com");
 	list.add(item);
 
 	item = new HashMap<String, String>();
-	item.put("title", "Icon");
-	item.put("description", "Matt Hamm: ");
-	item.put("link","matt@supereightstudio.com");
+	item.put("title", "Title Background");
+	item.put("description", "Hugh Briss");
+	item.put("link","http://www.hughbriss.com");
 	list.add(item);
+
+	item = new HashMap<String, String>();
+	item.put("title", "Tweet Button");
+	item.put("description", "Jayson Lorenzen");
+	item.put("link","http://www.flickr.com/photos/jaysonlorenzen");
+	list.add(item);
+
+	item = new HashMap<String, String>();
+	item.put("title", "Carbon Fiber Background");
+	item.put("description", "okiegeek");
+	item.put("link","http://www.flickr.com/people/forceusr/");
+	list.add(item);
+	
 
     }
 

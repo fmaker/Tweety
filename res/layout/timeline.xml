@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/carbon_fiber" android:padding="15dp" android:orientation="vertical" android:gravity="center">
-<TextView  
-    android:layout_width="fill_parent" 
-    android:gravity="center" android:typeface="serif" android:textColor="@color/title_text" android:layout_height="wrap_content" android:textStyle="bold" android:textSize="28sp" android:background="@drawable/background_title" android:text="@string/timeline_title" android:layout_marginBottom="10dp"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent" android:layout_width="fill_parent"
+	android:background="@drawable/carbon_fiber" android:padding="15dp"
+	android:orientation="vertical" android:gravity="center">
+	<TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/timeline_title" android:background="@drawable/blue_background_title" style="@style/title"/>
 
 
-<ListView android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@color/content_background" android:smoothScrollbar="true" android:id="@+id/listTimeLine"></ListView>
+	<ListView android:layout_height="fill_parent"
+		android:layout_width="fill_parent" android:background="@color/content_background"
+		android:smoothScrollbar="true" android:id="@+id/listTimeLine"></ListView>
 </LinearLayout>
