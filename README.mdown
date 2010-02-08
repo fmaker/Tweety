@@ -1,0 +1,9 @@
+# Description
+Simple twitter App that uses all the fundamental features availiable in the Android platform.
+
+# Screenshots
+## Tweet Status Screen.
+(http://cloud.github.com/downloads/fmaker/Tweety/tweety_screenshot.png "Twitter Status")
+
+## Timeline Screen.
+(http://cloud.github.com/downloads/fmaker/Tweety/tweety_screenshot2.png "Twitter Timeline")
