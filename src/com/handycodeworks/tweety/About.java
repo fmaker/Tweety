@@ -50,11 +50,11 @@ public class About extends ListActivity {
 	item.put("link","http://www.hughbriss.com");
 	list.add(item);
 
-	item = new HashMap<String, String>();
-	item.put("title", "Tweet Button");
-	item.put("description", "Jayson Lorenzen");
-	item.put("link","http://www.flickr.com/photos/jaysonlorenzen");
-	list.add(item);
+//	item = new HashMap<String, String>();
+//	item.put("title", "Tweet Button");
+//	item.put("description", "Jayson Lorenzen");
+//	item.put("link","http://www.flickr.com/photos/jaysonlorenzen");
+//	list.add(item);
 
 	item = new HashMap<String, String>();
 	item.put("title", "Carbon Fiber Background");

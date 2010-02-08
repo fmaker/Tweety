@@ -136,6 +136,8 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 	    }
 	    break;
 	}
+	// Update count of characters
+	updateCharacterCount();
     }
 
     @Override

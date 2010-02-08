@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class LocationHelper implements LocationListener {
     private static final String TAG = "LocationHelper";
@@ -32,10 +33,13 @@ public class LocationHelper implements LocationListener {
     
     String getLocationString(){
 	
-	String locString = "Unknown";
+	String locString = "";
 	if(location != null){
 	    locString = "http://geopo.at/" + encode(location.getLatitude(),location.getLongitude(),3);
-	    //locString = String.format("%.4f, %.4f", lat,lon);
+	}
+	else{
+	    String msg = (String) context.getString(R.string.location_unavailiable);
+	    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 	}
 	Log.d(TAG,"Location string is: "+locString);
 	return locString;
