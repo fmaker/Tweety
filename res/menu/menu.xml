@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:id="@+id/menuPrefs" android:title="Preferences"
-		android:titleCondensed="Prefs" android:icon="@android:drawable/ic_menu_preferences"></item>
+	
 <item android:id="@+id/menuTimeline" android:title="Timeline" android:icon="@android:drawable/ic_menu_recent_history"></item>
-<item android:title="@string/tweet" android:visible="false" android:id="@+id/menuTweet" android:icon="@drawable/twitter_menu"></item><item android:title="@string/about" android:id="@+id/about" android:icon="@android:drawable/ic_menu_info_details"></item>
+<item android:title="@string/tweet" android:visible="false" android:id="@+id/menuTweet" android:icon="@drawable/twitter_menu"></item><item android:id="@+id/menuPrefs" android:title="Preferences" android:titleCondensed="Prefs" android:icon="@android:drawable/ic_menu_preferences"></item><item android:title="@string/about" android:id="@+id/about" android:icon="@android:drawable/ic_menu_info_details"></item>
 
 </menu>
