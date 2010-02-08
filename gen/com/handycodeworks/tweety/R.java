@@ -19,20 +19,25 @@ public final class R {
         public static final int update_font_color=0x7f050000;
     }
     public static final class drawable {
-        public static final int blue_background_title=0x7f020000;
-        public static final int carbon_fiber=0x7f020001;
-        public static final int globe=0x7f020002;
-        public static final int location_button=0x7f020003;
-        public static final int location_button_default=0x7f020004;
-        public static final int location_button_hover=0x7f020005;
-        public static final int location_button_pressed=0x7f020006;
-        public static final int tweet_button=0x7f020007;
-        public static final int tweet_button_default=0x7f020008;
-        public static final int tweet_button_pressed=0x7f020009;
-        public static final int twitter_bird=0x7f02000a;
-        public static final int twitter_bird_status=0x7f02000b;
-        public static final int twitter_icon=0x7f02000c;
-        public static final int twitter_menu=0x7f02000d;
+        public static final int black_button_default=0x7f020000;
+        public static final int blue_background_title=0x7f020001;
+        public static final int carbon_fiber=0x7f020002;
+        public static final int clear_button=0x7f020003;
+        public static final int clear_button_default=0x7f020004;
+        public static final int clear_button_pressed=0x7f020005;
+        public static final int clear_button_selected=0x7f020006;
+        public static final int globe=0x7f020007;
+        public static final int location_button=0x7f020008;
+        public static final int location_button_default=0x7f020009;
+        public static final int location_button_pressed=0x7f02000a;
+        public static final int location_button_selected=0x7f02000b;
+        public static final int tweet_button=0x7f02000c;
+        public static final int tweet_button_default=0x7f02000d;
+        public static final int tweet_button_pressed=0x7f02000e;
+        public static final int twitter_bird=0x7f02000f;
+        public static final int twitter_bird_status=0x7f020010;
+        public static final int twitter_icon=0x7f020011;
+        public static final int twitter_menu=0x7f020012;
     }
     public static final class id {
         public static final int LinearLayout01=0x7f090003;
@@ -40,15 +45,16 @@ public final class R {
         public static final int NumChars=0x7f090004;
         public static final int TextStatus=0x7f090007;
         public static final int UpdateButton=0x7f090009;
-        public static final int about=0x7f090013;
-        public static final int blueSelector=0x7f09000f;
+        public static final int about=0x7f090014;
+        public static final int blueSelector=0x7f090010;
         public static final int clearButton=0x7f090005;
+        public static final int clearSelector=0x7f09000e;
         public static final int listTimeLine=0x7f09000d;
         public static final int locationButton=0x7f090006;
-        public static final int locationSelector=0x7f09000e;
-        public static final int menuPrefs=0x7f090012;
-        public static final int menuTimeline=0x7f090010;
-        public static final int menuTweet=0x7f090011;
+        public static final int locationSelector=0x7f09000f;
+        public static final int menuPrefs=0x7f090013;
+        public static final int menuTimeline=0x7f090011;
+        public static final int menuTweet=0x7f090012;
         public static final int rowName=0x7f09000a;
         public static final int rowStatus=0x7f09000c;
         public static final int rowTime=0x7f09000b;
