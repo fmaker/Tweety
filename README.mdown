@@ -3,7 +3,7 @@ Simple twitter App that uses all the fundamental features availiable in the Andr
 
 # Screenshots
 ## Tweet Status Screen.
-[![](http://cloud.github.com/downloads/fmaker/Tweety/tweety_screenshot.png "Twitter Status")]
+[![Twitter Status](http://cloud.github.com/downloads/fmaker/Tweety/tweety_screenshot.png)]
 
 ## Timeline Screen.
-[![](http://cloud.github.com/downloads/fmaker/Tweety/tweety_screenshot2.png "Twitter Timeline")]
+[![Timeline](http://cloud.github.com/downloads/fmaker/Tweety/tweety_screenshot2.png)]
