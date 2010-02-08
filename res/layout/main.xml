@@ -12,22 +12,22 @@
 
 	<LinearLayout android:id="@+id/LinearLayout01"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:orientation="horizontal">
+		android:orientation="horizontal" android:gravity="center_vertical">
 		<TextView android:layout_height="wrap_content"
 			android:layout_gravity="left|center_vertical" android:text="@string/max_characters"
 			android:textSize="35sp" android:id="@+id/NumChars"
 			android:layout_width="fill_parent" android:layout_weight="1"></TextView>
 		<Button android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:text="@string/clear"
-			android:id="@+id/clearButton"></Button>
+			android:id="@+id/clearButton" android:layout_marginRight="5dp" android:layout_marginTop="2dp"></Button>
 		<Button android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/locationButton"
-			android:text="Location" android:layout_marginRight="5dp"></Button>
+			android:id="@+id/locationButton"
+			android:text="Location" android:layout_marginRight="5dp" android:layout_marginTop="2dp" android:layout_height="fill_parent"></Button>
 		<Button android:textColor="@color/update_font_color"
 			android:typeface="sans" android:layout_height="wrap_content"
 			android:id="@+id/UpdateButton" android:layout_alignParentRight="true"
-			android:paddingRight="15sp" android:background="@drawable/twitter_icon"
-			android:paddingLeft="45sp" android:textStyle="bold"
+			android:background="@drawable/tweet_button"
+			android:textStyle="bold"
 			android:layout_width="wrap_content" android:textSize="15sp"></Button>
 
 

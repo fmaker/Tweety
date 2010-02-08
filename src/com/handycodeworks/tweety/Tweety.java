@@ -16,14 +16,17 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Tweety extends Activity implements OnClickListener, OnKeyListener {
+public class Tweety extends Activity implements 
+OnTouchListener, OnClickListener, OnKeyListener {
     // Class variables
     private static final String TAG = "Tweety";
     private static final String USERNAME = "mcsgtest";
@@ -36,7 +39,7 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
     private String username, password;
 
     // UI Elements
-    private Button updateButton, locationButton, clearButton;
+    private Button tweetButton, locationButton, clearButton;
     private TextView textStatus, numChars;
 
     @Override
@@ -46,8 +49,9 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 	setContentView(R.layout.main);
 
 	// Find views by id
-	updateButton = (Button) findViewById(R.id.UpdateButton);
-	updateButton.setOnClickListener(this);
+	tweetButton = (Button) findViewById(R.id.UpdateButton);
+	tweetButton.setOnClickListener(this);
+	tweetButton.setOnTouchListener(this);
 	textStatus = (TextView) findViewById(R.id.TextStatus);
 	textStatus.setOnKeyListener(this);
 	numChars = (TextView) findViewById(R.id.NumChars);
@@ -92,6 +96,15 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 	return mTwitter;
     }
 
+    public boolean onTouch(View v, MotionEvent event) {
+	
+	// Show button is pressed
+	if(v.getId() == R.id.UpdateButton){
+	    tweetButton.setBackgroundResource(R.drawable.tweet_pressed);
+	}
+	return false;
+    }
+
     public void onClick(View v) {
 
 	String enteredText = textStatus.getText().toString();
@@ -105,32 +118,36 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 	    textStatus.setText(newEntry);
 	    break;
 	case R.id.UpdateButton:
+	    // Revert to unpressed state
+	    tweetButton.setBackgroundResource(R.drawable.tweet_button);
 
-		// Status can't be empty
-		if (enteredText.length() == 0) {
-		    Toast.makeText(this, R.string.empty_status, Toast.LENGTH_SHORT).show();
-		}
-		else if(enteredText.length() < 0){
-		    Toast.makeText(this, R.string.status_too_long, Toast.LENGTH_SHORT).show();
-		}
-		// Only process the button if status is not the same as the hint
-		else if (updateButton.getId() == v.getId()) {
-		    try {
-			getTwitter().setStatus(textStatus.getText().toString());
-			Toast.makeText(this, R.string.status_posted,Toast.LENGTH_SHORT).show();
+	    // Status can't be empty
+	    if (enteredText.length() == 0) {
+		Toast.makeText(this, R.string.empty_status, Toast.LENGTH_SHORT)
+			.show();
+	    } else if (enteredText.length() < 0) {
+		Toast.makeText(this, R.string.status_too_long,
+			Toast.LENGTH_SHORT).show();
+	    }
+	    // Only process the button if status is not the same as the hint
+	    else if (tweetButton.getId() == v.getId()) {
+		try {
+		    getTwitter().setStatus(textStatus.getText().toString());
+		    Toast.makeText(this, R.string.status_posted,
+			    Toast.LENGTH_SHORT).show();
 
-			// Show hint
-			textStatus.setText("");
+		    // Show hint
+		    textStatus.setText("");
 
-			// Refresh character label
-			updateCharacterCount();
-		    }
-		    catch(TwitterException te){
-			Log.e(TAG,te.toString());
-			Toast.makeText(this, R.string.no_twitter, Toast.LENGTH_SHORT).show();
-		    }
+		    // Refresh character label
+		    updateCharacterCount();
+		} catch (TwitterException te) {
+		    Log.e(TAG, te.toString());
+		    Toast.makeText(this, R.string.no_twitter,
+			    Toast.LENGTH_SHORT).show();
 		}
-		break;
+	    }
+	    break;
 	}
     }
 
@@ -183,11 +200,11 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
     private void updateCharacterCount() {
 	int charsLeft = NUM_CHARS - textStatus.getText().length();
 	if(charsLeft < 0){
-	    updateButton.setEnabled(false);
+	    tweetButton.setEnabled(false);
 	    numChars.setTextColor(Color.RED);
 	}
 	else{
-	    updateButton.setEnabled(true);
+	    tweetButton.setEnabled(true);
 	    numChars.setTextColor(Color.LTGRAY);
 	}
 	numChars.setText(String.valueOf(charsLeft));

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="tweet">Tweet</string>
     <string name="about">About</string>
     <string name="boot_enabled">boot_enabled</string>
     <string name="tweets_vibrate">New Tweets Vibrate</string>
@@ -9,7 +10,7 @@
 	<string name="max_characters">140</string>
 	<string name="hello">Hello World, Tweety!</string>
 	<string name="app_name">Tweety</string>
-	<string name="whats_happening">What's Happening?</string>
+	<string name="whats_happening">What\''s Happening?</string>
 	<string name="update">update</string>
     <string name="status_posted">Status posted</string>
     <string name="empty_status">Can not post empty status!</string>

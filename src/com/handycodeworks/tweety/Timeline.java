@@ -10,6 +10,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -52,6 +55,41 @@ public class Timeline extends Activity{
 	
 	NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	nm.cancel(UpdateService.NOTIFICATION_ID);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	MenuInflater inflater = getMenuInflater();
+	inflater.inflate(R.menu.menu, menu);
+	
+	// Enable Tweet and disable Timeline
+	MenuItem m = menu.findItem(R.id.menuTweet);
+	m.setVisible(true);
+	
+	m = menu.findItem(R.id.menuTimeline);
+	m.setVisible(false);
+	
+	return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+	switch (item.getItemId()) {
+		case R.id.about:
+        	    Intent ia = new Intent(Timeline.this, About.class);
+        	    startActivity(ia);
+        	    break;
+        	case R.id.menuPrefs:
+        	    Intent ip = new Intent(Timeline.this, Prefs.class);
+        	    startActivity(ip);
+        	    break;
+        	case R.id.menuTweet:
+        	    Intent it = new Intent(Timeline.this, Tweety.class);
+        	    startActivity(it);
+        	    break;
+	}
+	return true;
     }
 
     @Override
