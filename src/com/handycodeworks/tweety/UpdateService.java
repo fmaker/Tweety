@@ -22,12 +22,7 @@ import android.widget.Toast;
 
 public class UpdateService extends Service implements
 	OnSharedPreferenceChangeListener {
-    // Constants
-    // private static final String USERNAME = "mcsgtest";
-    // private static final String PASSWORD = "pD98^LGy6m";
-    static final String USERNAME = "frankmaker",
-    				PASSWORD = "pepsi?3",
-    				TAG = "UpdateService";
+    static final String TAG = "UpdateService";
     static final int NOTIFICATION_ID = 1334;
     static final String ACTION_NEW_TWEETS = "ACTION_NEW_TWEETS";
 
@@ -69,10 +64,13 @@ public class UpdateService extends Service implements
 
     private Twitter getTwitter() {
 	if (mTwitter == null) {
-	    String username = prefs.getString("username", USERNAME);
-	    String password = prefs.getString("password", PASSWORD);
-	    mTwitter = new Twitter(username, password);
-	    mTwitter.setSource(TAG);
+	    String username = prefs.getString("username", null);
+	    String password = prefs.getString("password", null);
+	    
+	    if(username != null && password != null){
+		mTwitter = new Twitter(username, password);
+	    	mTwitter.setSource(TAG);
+	    }
 	}
 	return mTwitter;
     }

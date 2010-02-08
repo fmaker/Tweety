@@ -4,29 +4,31 @@
 	android:layout_height="fill_parent" android:padding="15dp"
 	android:background="@drawable/carbon_fiber">
 	<TextView android:text="@string/whats_happening"
-		android:layout_height="wrap_content" style="@style/title" android:background="@drawable/blue_background_title" android:layout_width="fill_parent"/>
-    <LinearLayout android:id="@+id/LinearLayout01"
-        android:layout_height="wrap_content" android:layout_width="fill_parent"
-        android:orientation="horizontal" android:gravity="right|center_vertical" android:paddingBottom="5dp">
-    <TextView android:layout_height="wrap_content"
-        android:text="@string/max_characters"
-        android:textSize="35sp" android:id="@+id/NumChars"
-        android:layout_width="wrap_content" android:layout_weight="1"/>
-        <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/clearButton" android:layout_marginTop="2dp"
-            android:layout_marginRight="3dp" android:background="@drawable/clear_button" android:paddingRight="5dp"/>
-        <Button android:layout_width="wrap_content" android:id="@+id/locationButton"
-            android:layout_marginTop="2dp"
-            android:layout_height="fill_parent" android:layout_marginRight="3dp" android:background="@drawable/location_button"/>
-    </LinearLayout>
+		android:layout_height="wrap_content" style="@style/title"
+		android:background="@drawable/blue_background_title"
+		android:layout_width="fill_parent" />
+	<LinearLayout android:id="@+id/LinearLayout01"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:orientation="horizontal" android:gravity="right|center_vertical"
+		android:paddingBottom="5dp">
+		<TextView android:layout_height="wrap_content" android:text="@string/max_characters"
+			android:textSize="35sp" android:id="@+id/NumChars"
+			android:layout_width="wrap_content" android:layout_weight="1" />
+		<Button android:layout_width="wrap_content" android:id="@+id/locationButton"
+			android:layout_marginTop="2dp" android:layout_height="fill_parent"
+			android:layout_marginRight="3dp" android:background="@drawable/location_button" />
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:id="@+id/clearButton"
+			android:layout_marginTop="2dp" android:layout_marginRight="3dp"
+			android:background="@drawable/clear_button" android:paddingRight="5dp" />
+	</LinearLayout>
 	<EditText android:layout_width="fill_parent"
 		android:layout_gravity="center" android:gravity="top" android:id="@+id/TextStatus"
 		android:hint="Enter your tweet" android:padding="10dp"
-		android:layout_height="wrap_content" android:layout_weight="0"
-		android:minLines="6" android:maxLines="6" />
-        
-
-	
-
-<LinearLayout android:id="@+id/LinearLayout02" android:layout_height="wrap_content" android:gravity="center" android:layout_width="fill_parent" android:paddingTop="5dp"><Button android:textColor="@color/update_font_color" android:layout_height="wrap_content" android:id="@+id/UpdateButton" android:layout_alignParentRight="true" android:textSize="15sp" android:background="@drawable/tweet_button" android:maxHeight="47px" android:layout_width="fill_parent"/></LinearLayout>
+		android:layout_height="wrap_content" android:layout_weight="1" />
+	<Button android:textColor="@color/update_font_color"
+		android:layout_height="wrap_content" android:id="@+id/UpdateButton"
+		android:layout_alignParentRight="true" android:textSize="15sp"
+		android:background="@drawable/tweet_button" android:maxHeight="47px"
+		android:layout_width="fill_parent" />
 </LinearLayout>
