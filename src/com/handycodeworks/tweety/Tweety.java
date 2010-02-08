@@ -25,8 +25,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Tweety extends Activity implements 
-OnTouchListener, OnClickListener, OnKeyListener {
+public class Tweety extends Activity implements OnClickListener, OnKeyListener {
     // Class variables
     private static final String TAG = "Tweety";
     private static final String USERNAME = "mcsgtest";
@@ -51,7 +50,6 @@ OnTouchListener, OnClickListener, OnKeyListener {
 	// Find views by id
 	tweetButton = (Button) findViewById(R.id.UpdateButton);
 	tweetButton.setOnClickListener(this);
-	tweetButton.setOnTouchListener(this);
 	textStatus = (TextView) findViewById(R.id.TextStatus);
 	textStatus.setOnKeyListener(this);
 	numChars = (TextView) findViewById(R.id.NumChars);
@@ -96,15 +94,6 @@ OnTouchListener, OnClickListener, OnKeyListener {
 	return mTwitter;
     }
 
-    public boolean onTouch(View v, MotionEvent event) {
-	
-	// Show button is pressed
-	if(v.getId() == R.id.UpdateButton){
-	    tweetButton.setBackgroundResource(R.drawable.tweet_pressed);
-	}
-	return false;
-    }
-
     public void onClick(View v) {
 
 	String enteredText = textStatus.getText().toString();
@@ -118,8 +107,6 @@ OnTouchListener, OnClickListener, OnKeyListener {
 	    textStatus.setText(newEntry);
 	    break;
 	case R.id.UpdateButton:
-	    // Revert to unpressed state
-	    tweetButton.setBackgroundResource(R.drawable.tweet_button);
 
 	    // Status can't be empty
 	    if (enteredText.length() == 0) {
@@ -176,12 +163,6 @@ OnTouchListener, OnClickListener, OnKeyListener {
         	    break;
 	}
 	return true;
-    }
-
-    @Override
-    protected void onDestroy() {
-	//stopService(new Intent(this,UpdateService.class));
-	super.onDestroy();
     }
 
     @Override
