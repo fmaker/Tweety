@@ -61,6 +61,12 @@ public class About extends ListActivity {
 	item.put("description", "okiegeek");
 	item.put("link","http://www.flickr.com/people/forceusr/");
 	list.add(item);
+
+	item = new HashMap<String, String>();
+	item.put("title", "Location Icon");
+	item.put("description", "Joseph Wain");
+	item.put("link","http://glyphish.com/");
+	list.add(item);
 	
 
     }

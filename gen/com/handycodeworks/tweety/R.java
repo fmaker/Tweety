@@ -34,10 +34,11 @@ public final class R {
         public static final int tweet_button=0x7f02000c;
         public static final int tweet_button_default=0x7f02000d;
         public static final int tweet_button_pressed=0x7f02000e;
-        public static final int twitter_bird=0x7f02000f;
-        public static final int twitter_bird_status=0x7f020010;
-        public static final int twitter_icon=0x7f020011;
-        public static final int twitter_menu=0x7f020012;
+        public static final int tweet_button_selected=0x7f02000f;
+        public static final int twitter_bird=0x7f020010;
+        public static final int twitter_bird_status=0x7f020011;
+        public static final int twitter_icon=0x7f020012;
+        public static final int twitter_menu=0x7f020013;
     }
     public static final class id {
         public static final int LinearLayout01=0x7f090003;
@@ -45,7 +46,6 @@ public final class R {
         public static final int TextStatus=0x7f090007;
         public static final int UpdateButton=0x7f090008;
         public static final int about=0x7f090013;
-        public static final int blueSelector=0x7f09000f;
         public static final int clearButton=0x7f090006;
         public static final int clearSelector=0x7f09000d;
         public static final int listTimeLine=0x7f09000c;
@@ -60,6 +60,7 @@ public final class R {
         public static final int text1=0x7f090000;
         public static final int text2=0x7f090001;
         public static final int text3=0x7f090002;
+        public static final int tweetSelector=0x7f09000f;
     }
     public static final class layout {
         public static final int about=0x7f030000;

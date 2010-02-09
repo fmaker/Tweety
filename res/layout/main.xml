@@ -9,8 +9,7 @@
 		android:layout_width="fill_parent" />
 	<LinearLayout android:id="@+id/LinearLayout01"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:orientation="horizontal" android:gravity="right|center_vertical"
-		android:paddingBottom="5dp">
+		android:orientation="horizontal" android:gravity="right|center_vertical">
 		<TextView android:layout_height="wrap_content" android:text="@string/max_characters"
 			android:textSize="35sp" android:id="@+id/NumChars"
 			android:layout_width="wrap_content" android:layout_weight="1" />
@@ -25,10 +24,10 @@
 	<EditText android:layout_width="fill_parent"
 		android:layout_gravity="center" android:gravity="top" android:id="@+id/TextStatus"
 		android:hint="Enter your tweet" android:padding="10dp"
-		android:layout_height="wrap_content" android:layout_weight="1" />
+		android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
 	<Button android:textColor="@color/update_font_color"
 		android:layout_height="wrap_content" android:id="@+id/UpdateButton"
 		android:layout_alignParentRight="true" android:textSize="15sp"
-		android:background="@drawable/tweet_button" android:maxHeight="47px"
-		android:layout_width="fill_parent" />
+		android:maxHeight="47px"
+		android:layout_width="fill_parent" android:background="@drawable/tweet_button"/>
 </LinearLayout>
