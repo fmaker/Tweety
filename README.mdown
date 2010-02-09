@@ -2,11 +2,11 @@
 Simple twitter App that uses all the fundamental features availiable in the Android platform. This application was partially developed during Marakana's [Android Bootcamp Training Course](http://marakana.com/training/android/android_bootcamp.html "Android Bootcamp").
 
 # Application Design (Courtesy of [Marakana](http://marakana.com "Marakana))
-[![MyTwitter Design](http://marakana.com/static/tutorials/MyTwitter.png)]
+![MyTwitter Design](http://marakana.com/static/tutorials/MyTwitter.png)
 
 # Screenshots
 ## Tweet Status Screen.
-[![Twitter Status](http://cloud.github.com/downloads/fmaker/Tweety/tweety_screenshot.png)]
+![Twitter Status](http://cloud.github.com/downloads/fmaker/Tweety/tweety_screenshot.png)
 
 ## Timeline Screen.
-[![Timeline](http://cloud.github.com/downloads/fmaker/Tweety/tweety_screenshot2.png)]
+![Timeline](http://cloud.github.com/downloads/fmaker/Tweety/tweety_screenshot2.png)
