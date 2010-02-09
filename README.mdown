@@ -3,7 +3,7 @@ Simple twitter App that uses all the fundamental features availiable in the Andr
 
 # Application Design
 Courtesy of [Marakana](http://marakana.com "Marakana)
-![MyTwitter Design](http://marakana.com/static/tutorials/MyTwitter.png)
+[![MyTwitter Design](http://marakana.com/static/tutorials/MyTwitter.png)]
 
 # Screenshots
 ## Tweet Status Screen.
