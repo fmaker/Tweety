@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Color;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Debug;
 import android.preference.PreferenceManager;
@@ -32,11 +31,9 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,7 +57,9 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	
+
+	Debug.startMethodTracing("tweety");
+
 	setContentView(R.layout.main);
 
 	// Find views by id
@@ -78,16 +77,16 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 	prefs = PreferenceManager.getDefaultSharedPreferences(this);
 	prefs.registerOnSharedPreferenceChangeListener(
 		new OnSharedPreferenceChangeListener() {
-		    
+
 		    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			    String key) {
 			mTwitter = null;
 		    }
 		});
-	
+
 	// Start update service
 	startService(new Intent(this,UpdateService.class));
-	
+
 	// Init location manager
 	sLocationHelper = new LocationHelper(this);
 	sLocationHelper.startUpdates();
@@ -97,11 +96,11 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 	if(mTwitter == null){
 	    username = prefs.getString("username", USERNAME);
 	    password = prefs.getString("password", PASSWORD);
-	    
-	    
+
+
 	    if(username == "" || username == null ||
 	       password == "" || password == null ){
-		Toast.makeText(getApplicationContext(), "Username and/or password not set!", 
+		Toast.makeText(getApplicationContext(), "Username and/or password not set!",
 			Toast.LENGTH_SHORT).show();
 	    }
 	    mTwitter = new Twitter(username, password);
@@ -141,14 +140,20 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 
 		    // Show hint
 		    textStatus.setText("");
-
 		    // Refresh character label
 		    updateCharacterCount();
+		} catch (NullPointerException npe){
+			Log.e(TAG, "Null twitter object, check username and password");
+		    Toast.makeText(this, R.string.no_account,
+				    Toast.LENGTH_SHORT).show();
 		} catch (TwitterException te) {
 		    Log.e(TAG, te.toString());
 		    Toast.makeText(this, R.string.no_twitter,
 			    Toast.LENGTH_SHORT).show();
 		}
+
+		Debug.stopMethodTracing();
+
 	    }
 	    break;
 	}
