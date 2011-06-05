@@ -58,8 +58,6 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
-	Debug.startMethodTracing("tweety");
-
 	setContentView(R.layout.main);
 
 	// Find views by id
@@ -151,8 +149,6 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 		    Toast.makeText(this, R.string.no_twitter,
 			    Toast.LENGTH_SHORT).show();
 		}
-
-		Debug.stopMethodTracing();
 
 	    }
 	    break;
