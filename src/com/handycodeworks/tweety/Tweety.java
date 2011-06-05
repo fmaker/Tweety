@@ -41,8 +41,8 @@ import android.widget.Toast;
 public class Tweety extends Activity implements OnClickListener, OnKeyListener {
     // Class variables
     private static final String TAG = "Tweety";
-    private static final String USERNAME = "mcsgtest";
-    private static final String PASSWORD = "pD98^LGy6m";
+    private static final String USERNAME;
+    private static final String PASSWORD;
     private SharedPreferences prefs;
     static LocationHelper sLocationHelper;
 
@@ -141,7 +141,7 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 		    // Refresh character label
 		    updateCharacterCount();
 		} catch (NullPointerException npe){
-			Log.e(TAG, "Null twitter object, check username and password");
+			Log.e(TAG, "Check username and password");
 		    Toast.makeText(this, R.string.no_account,
 				    Toast.LENGTH_SHORT).show();
 		} catch (TwitterException te) {
