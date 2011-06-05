@@ -41,10 +41,13 @@ import android.widget.Toast;
 public class Tweety extends Activity implements OnClickListener, OnKeyListener {
     // Class variables
     private static final String TAG = "Tweety";
-    private static final String USERNAME;
-    private static final String PASSWORD;
     private SharedPreferences prefs;
     static LocationHelper sLocationHelper;
+    private final static String CONSUMER_KEY = "i6hchEkpicnjWlwoqyw";
+    private final static String CONSUMER_SECRET = "yD4vxgT21yFsgMQS50Qabwvx3kIR70NhlpSa8ImI";
+    private final static String USER_KEY = "27429414-CHAtID7NmAmF7UCH2F8M9ffvNlOrdZjOqyfOrfq0H";
+    private final static String USER_SECRET = "YfRgfWmrqSbjAtyUIzQCHZo5WcPMLQj0mQOqPjRyo";
+
 
     // Instance variables
     private Twitter mTwitter;
@@ -92,8 +95,8 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 
     private Twitter getTwitter(){
 	if(mTwitter == null){
-	    username = prefs.getString("username", USERNAME);
-	    password = prefs.getString("password", PASSWORD);
+	    username = prefs.getString("username", "");
+	    password = prefs.getString("password", "");
 
 
 	    if(username == "" || username == null ||

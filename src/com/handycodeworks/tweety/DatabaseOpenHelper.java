@@ -59,7 +59,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper{
     
     public static ContentValues statusToContentValues(Status status){
 	ContentValues cv = new ContentValues();
-	cv.put(C_ID, status.id);
+	cv.put(C_ID, status.id.intValue());
 	cv.put(C_CREATED_AT, status.createdAt.getTime());
 	cv.put(C_TEXT, status.text);
 	cv.put(C_USER, status.user.screenName);
