@@ -16,25 +16,36 @@
  */
 package com.handycodeworks.tweety;
 
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.OAuthProvider;
+import oauth.signpost.basic.DefaultOAuthConsumer;
+import oauth.signpost.basic.DefaultOAuthProvider;
+import winterwell.jtwitter.OAuthSignpostClient;
 import winterwell.jtwitter.Twitter;
 import winterwell.jtwitter.TwitterException;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Debug;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,10 +54,21 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
     private static final String TAG = "Tweety";
     private SharedPreferences prefs;
     static LocationHelper sLocationHelper;
-    private final static String CONSUMER_KEY = "i6hchEkpicnjWlwoqyw";
-    private final static String CONSUMER_SECRET = "yD4vxgT21yFsgMQS50Qabwvx3kIR70NhlpSa8ImI";
-    private final static String USER_KEY = "27429414-CHAtID7NmAmF7UCH2F8M9ffvNlOrdZjOqyfOrfq0H";
-    private final static String USER_SECRET = "YfRgfWmrqSbjAtyUIzQCHZo5WcPMLQj0mQOqPjRyo";
+    private final static String TWITTER_OAUTH_KEY = "9Kf835SE0cuBjhSIZsxpQ";
+    private final static String TWITTER_OAUTH_SECRET = "cXzb4WsDLIFIMGBKyNpxEL3Sdtww74xBtoxlEXXrt0";
+    private final static String OAUTH_TOKEN = "OAUTH_TOKEN";
+    private final static String OAUTH_TOKEN_SECRET = "OAUTH_TOKEN_SECRET";
+    private final static int PIN_DIALOG = 0;
+    private OAuthSignpostClient client;
+    
+    OAuthConsumer consumer = new DefaultOAuthConsumer(
+    		TWITTER_OAUTH_KEY,
+    		TWITTER_OAUTH_SECRET);
+
+    OAuthProvider provider = new DefaultOAuthProvider(
+            "http://twitter.com/oauth/request_token",
+            "http://twitter.com/oauth/access_token",
+            "http://twitter.com/oauth/authorize");
 
 
     // Instance variables
@@ -95,22 +117,84 @@ public class Tweety extends Activity implements OnClickListener, OnKeyListener {
 
     private Twitter getTwitter(){
 	if(mTwitter == null){
+		
 	    username = prefs.getString("username", "");
-	    password = prefs.getString("password", "");
 
 
-	    if(username == "" || username == null ||
-	       password == "" || password == null ){
-		Toast.makeText(getApplicationContext(), "Username and/or password not set!",
+	    if(username == "" || username == null){
+		Toast.makeText(getApplicationContext(), "Username not set!",
 			Toast.LENGTH_SHORT).show();
 	    }
-	    mTwitter = new Twitter(username, password);
-	    mTwitter.setSource(TAG); // Set Tweety as our twitter app name
+	    
+	    // See if we already have the token stored
+	    SharedPreferences sharedPrefs = getSharedPreferences("Tweety", MODE_PRIVATE);
+	    final String TOKEN = sharedPrefs.getString(OAUTH_TOKEN, null);
+	    final String TOKEN_SECRET = sharedPrefs.getString(OAUTH_TOKEN_SECRET, null);
+	    
+	    if(TOKEN == null || TOKEN_SECRET == null){
+	    	getOAuthPin();
+	    	showDialog(PIN_DIALOG);
+	    }
+	    else{
+	    	connectToTwitter(TOKEN, TOKEN_SECRET);
+	    }
 	}
 	return mTwitter;
     }
+    
+    private void connectToTwitter(final String TOKEN, final String TOKEN_SECRET){
+	    // Try to connect
+	    client = new OAuthSignpostClient(TWITTER_OAUTH_KEY, TWITTER_OAUTH_SECRET, TOKEN, TOKEN_SECRET);
+	    if(client.canAuthenticate())
+	    	mTwitter = new Twitter(prefs.getString("username", ""),client);
+    }
+    
+    private void gotOAuthPin(String pin){
+    		SharedPreferences.Editor editor = getSharedPreferences("Tweety", MODE_PRIVATE).edit();
+    		client.setAuthorizationCode(pin);
+    		editor.putString(OAUTH_TOKEN, client.getAccessToken()[0]);
+    		editor.putString(OAUTH_TOKEN_SECRET, client.getAccessToken()[1]);
+    	    if (!editor.commit()) 
+    	        throw new RuntimeException("Unable to save new token.");
+    	    connectToTwitter(client.getAccessToken()[0],client.getAccessToken()[1]);
+    }
+    
+    private void getOAuthPin(){
 
-    public void onClick(View v) {
+	    client = new OAuthSignpostClient(TWITTER_OAUTH_KEY, TWITTER_OAUTH_SECRET, "oob");
+        Twitter jtwit = new Twitter(username, client);
+        Intent authApp = new Intent(this, WebViewActivity.class);
+        final String authURL = client.authorizeUrl().toString();
+        authApp.putExtra("URL", authURL);
+        
+        Toast.makeText(this, "Remember PIN to authorize application", Toast.LENGTH_LONG).show();
+    	startActivity(authApp);
+        
+    }
+    
+    @Override
+	protected Dialog onCreateDialog(int id) {
+    	switch(id){
+    	case PIN_DIALOG:
+            LayoutInflater factory = LayoutInflater.from(this);
+            final View textEntryView = factory.inflate(R.layout.pin, null);
+            final EditText pinText = (EditText) textEntryView.findViewById(R.id.pin_text);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Twitter OAuth PIN");
+	        builder.setView(textEntryView);
+	        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                	if(pinText != null)
+                		gotOAuthPin(pinText.getText().toString());
+                }
+            });
+	        return builder.create();
+    	}
+    	
+		return super.onCreateDialog(id);
+	}
+
+	public void onClick(View v) {
 
 	String enteredText = textStatus.getText().toString();
 
